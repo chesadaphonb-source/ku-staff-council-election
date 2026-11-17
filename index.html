@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ทดลองเลือกตั้งกรรมการสภาพนักงาน คณะสิ่งแวดล้อม สำหรับอาจารย์และบุคลากร">
+<title>เลือกตั้งกรรมการสภาพนักงาน | คณะสิ่งแวดล้อม</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="app.js" defer></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap top">
+    <div class="brand">
+      <span class="mark" aria-hidden="true">KU</span>
+      <span><strong>เลือกตั้งกรรมการสภาพนักงาน</strong><small>คณะสิ่งแวดล้อม มหาวิทยาลัยเกษตรศาสตร์</small></span>
+    </div>
+    <nav aria-label="เมนูหลัก">
+      <a href="#candidates">รายชื่อผู้สมัคร</a><a href="#vote">ลงคะแนน</a><a href="#results">ผลเลือกตั้ง</a><a href="#admin">จัดการรอบทดลอง</a>
+    </nav>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero" aria-labelledby="election-title">
+    <div class="hero-content">
+      <span class="state" id="election-state"></span>
+      <h1 id="election-title"></h1>
+      <p>สำหรับอาจารย์และบุคลากร คณะสิ่งแวดล้อม</p>
+    </div>
+    <div class="art" aria-hidden="true"><div class="paper"><span>✓</span></div><div class="box"></div></div>
+  </section>
+  <div class="layout">
+    <section class="panel primary" id="view" aria-labelledby="view-title"></section>
+    <aside class="sidebar">
+      <section class="panel side">
+        <h2>สถานะการใช้สิทธิ์</h2>
+        <div class="turnout"><strong id="used"></strong><span id="eligible"></span></div>
+        <progress id="turnout" aria-label="สัดส่วนผู้ใช้สิทธิ์"></progress>
+      </section>
+      <section class="panel side demo">
+        <h2>วิธีทดลอง</h2>
+        <p>ใช้รหัสตัวอย่างเพื่อตรวจสอบสิทธิ์ แล้วเลือกผู้สมัคร 1 คน หรือเลือกไม่ประสงค์ลงคะแนน</p>
+        <div id="demo-codes" class="codes"></div>
+        <p>ข้อมูลทดลองอยู่ในเบราว์เซอร์นี้ ใช้รหัสตัวอย่างเท่านั้น</p>
+      </section>
+    </aside>
+  </div>
+</main>
+<footer class="wrap">ต้นแบบสำหรับทดลองการเลือกตั้งออนไลน์</footer>
+<dialog id="confirm-vote">
+  <form method="dialog">
+    <h2>ยืนยันส่งบัตรลงคะแนน</h2>
+    <p id="review-choice"></p>
+    <p>หลังส่งบัตรแล้วจะแก้ไขตัวเลือกไม่ได้</p>
+    <div class="actions"><button value="cancel" class="secondary" autofocus>กลับไปแก้ไข</button><button value="confirm">ยืนยันส่งบัตร</button></div>
+  </form>
+</dialog>
+</body>
+</html>
