@@ -146,10 +146,10 @@ function renderBallot(election) {
   });
   options(election).forEach((name, index) => {
     const abstention = index === election.candidates.length;
-    const label = make('label', 'option');
+    const label = make('label', abstention ? 'option option-abstain' : 'option option-candidate');
     const visual = abstention ? make('span', 'number', '–') : portrait(election, index);
     visual.setAttribute('aria-hidden', 'true');
-    const nameBlock = make('span');
+    const nameBlock = make('span', abstention ? '' : 'option-copy');
     nameBlock.append(make('strong', '', name));
     if (!abstention) nameBlock.prepend(make('small', '', 'ผู้สมัครหมายเลข ' + (index + 1)));
     const radio = make('input');
@@ -191,7 +191,7 @@ review.addEventListener('close', async () => {
       election.ballots.sort((a, b) => a - b);
     });
     verifiedCode = '';
-    render('รับบัตรลงคะแนนแล้ว รหัสนี้ใช้สิทธิ์เรียบร้อย');
+    render('รับบัตรลงคะแนนแล้ว รหัสนี้ใช้สิทธิ์เรียบร้อย', { ballotAccepted: true });
   } catch (error) {
     feedback(error);
   }
@@ -378,12 +378,14 @@ function addAction(container, label, onClick, style) {
   container.append(button);
 }
 
-function render(message) {
+function render(message, { ballotAccepted = false } = {}) {
   const election = load();
   const route = ['#candidates', '#results', '#admin'].includes(location.hash) ? location.hash : '#vote';
   const phaseLabels = { open: 'เปิดรับบัตร · รอบทดลอง', closed: 'ปิดหีบ · รอบทดลอง', published: 'เผยแพร่ผลแล้ว · รอบทดลอง' };
   document.querySelector('#election-title').textContent = election.title;
-  document.querySelector('#election-state').textContent = phaseLabels[election.phase];
+  const phase = document.querySelector('#election-state');
+  phase.textContent = phaseLabels[election.phase];
+  phase.dataset.phase = election.phase;
   document.querySelector('#used').textContent = format.format(election.used.length);
   document.querySelector('#eligible').textContent = '/ ' + format.format(election.codes.length) + ' ผู้มีสิทธิ์';
   Object.assign(document.querySelector('#turnout'), { max: election.codes.length, value: election.used.length });
@@ -399,6 +401,12 @@ function render(message) {
   if (message) {
     const status = make('p', 'notice', message);
     status.setAttribute('role', 'status');
+    if (ballotAccepted) {
+      const mark = make('span', 'success-mark', '✓');
+      mark.setAttribute('aria-hidden', 'true');
+      status.classList.add('notice-success');
+      status.prepend(mark);
+    }
     view.querySelector('h2').after(status);
     status.tabIndex = -1;
     status.focus();
