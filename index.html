@@ -1,62 +1,63 @@
 <!doctype html>
 <html lang="th">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="ทดลองเลือกตั้งกรรมการสภาพนักงาน คณะสิ่งแวดล้อม สำหรับอาจารย์และบุคลากร">
-<title>เลือกตั้งกรรมการสภาพนักงาน | คณะสิ่งแวดล้อม</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
-<script src="app.js" defer></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; base-uri 'none'; form-action 'none'">
+  <meta name="description" content="ทางเข้าสู่ระบบเลือกตั้งกรรมการสภาพนักงานสำหรับอาจารย์และบุคลากร คณะสิ่งแวดล้อม มหาวิทยาลัยเกษตรศาสตร์">
+  <meta name="voter-app-url" content="">
+  <title>เลือกตั้งกรรมการสภาพนักงาน | คณะสิ่งแวดล้อม</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&amp;display=swap">
+  <link rel="stylesheet" href="style.css">
+  <script src="links.js" defer></script>
 </head>
 <body>
-<header class="site-header">
-  <div class="wrap top">
-    <div class="brand">
-      <span class="mark" aria-hidden="true">KU</span>
-      <span><strong>เลือกตั้งกรรมการสภาพนักงาน</strong><small>คณะสิ่งแวดล้อม มหาวิทยาลัยเกษตรศาสตร์</small></span>
+  <header class="site-header">
+    <div class="wrap header-content">
+      <div class="brand">
+        <span class="mark" aria-hidden="true">KU</span>
+        <div><strong>คณะสิ่งแวดล้อม</strong><small>มหาวิทยาลัยเกษตรศาสตร์</small></div>
+      </div>
+      <a class="guide-link" href="#guide">วิธีใช้สิทธิ์</a>
     </div>
-    <nav aria-label="เมนูหลัก">
-      <a href="#candidates">รายชื่อผู้สมัคร</a><a href="#vote">ลงคะแนน</a><a href="#results">ผลเลือกตั้ง</a><a href="#admin">จัดการรอบทดลอง</a>
-    </nav>
-  </div>
-</header>
-<main class="wrap">
-  <section class="hero" aria-labelledby="election-title">
-    <div class="hero-content">
-      <span class="state" id="election-state"></span>
-      <h1 id="election-title"></h1>
-      <p>สำหรับอาจารย์และบุคลากร คณะสิ่งแวดล้อม</p>
+  </header>
+
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <div class="hero-content">
+        <h1 id="title">เลือกตั้งกรรมการสภาพนักงาน</h1>
+        <p>สำหรับอาจารย์และบุคลากร คณะสิ่งแวดล้อม</p>
+        <div class="actions">
+          <a class="action primary" data-election-page="vote" hidden>ไปหน้าลงคะแนน <span aria-hidden="true">↗</span></a>
+          <a class="action secondary" data-election-page="status" hidden>ตรวจสถานะ</a>
+        </div>
+        <p class="availability" id="availability" role="status" hidden>ลิงก์ลงคะแนนยังไม่พร้อมใช้งาน</p>
+        <noscript><p class="availability">เปิด JavaScript เพื่อแสดงลิงก์ลงคะแนนและตรวจสถานะ</p></noscript>
+      </div>
+      <div class="ballot-art" aria-hidden="true">
+        <div class="ballot-paper">✓</div>
+        <div class="ballot-box"></div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="panel" id="guide" aria-labelledby="guide-title">
+        <h2 id="guide-title">เตรียมข้อมูลก่อนลงคะแนน</h2>
+        <ul>
+          <li>ชื่อและนามสกุลของผู้ลงคะแนน</li>
+          <li>อีเมลที่เปิดรับได้สำหรับใบยืนยัน เช่น Gmail, Outlook หรือ KU</li>
+          <li>รหัสยืนยัน 6 หลักที่ระบบส่งไปยังอีเมลที่กรอก</li>
+        </ul>
+        <p class="note">อีเมลที่ยืนยันแล้วใช้ส่งบัตรได้ครั้งเดียว ใช้อีเมลเดิมตรวจสถานะหลังส่งบัตร</p>
+      </section>
+      <nav class="panel election-links" aria-label="ข้อมูลการเลือกตั้ง" id="election-links" hidden>
+        <a data-election-page="candidates" hidden>รายชื่อผู้สมัคร <span aria-hidden="true">→</span></a>
+        <a data-election-page="results" hidden>ผลเลือกตั้ง <span aria-hidden="true">→</span></a>
+      </nav>
     </div>
-    <div class="art" aria-hidden="true"><div class="paper"><span>✓</span></div><div class="box"></div></div>
-  </section>
-  <div class="layout">
-    <section class="panel primary" id="view" aria-labelledby="view-title"></section>
-    <aside class="sidebar">
-      <section class="panel side">
-        <h2>สถานะการใช้สิทธิ์</h2>
-        <div class="turnout"><strong id="used"></strong><span id="eligible"></span></div>
-        <progress id="turnout" aria-label="สัดส่วนผู้ใช้สิทธิ์"></progress>
-      </section>
-      <section class="panel side demo">
-        <h2>วิธีทดลอง</h2>
-        <p>ใช้รหัสตัวอย่างเพื่อตรวจสอบสิทธิ์ แล้วเลือกผู้สมัคร 1 คน หรือเลือกไม่ประสงค์ลงคะแนน</p>
-        <div id="demo-codes" class="codes"></div>
-        <p>ข้อมูลทดลองอยู่ในเบราว์เซอร์นี้ ใช้รหัสตัวอย่างเท่านั้น</p>
-      </section>
-    </aside>
-  </div>
-</main>
-<footer class="wrap">ต้นแบบสำหรับทดลองการเลือกตั้งออนไลน์</footer>
-<dialog id="confirm-vote">
-  <form method="dialog">
-    <h2>ยืนยันส่งบัตรลงคะแนน</h2>
-    <p id="review-choice"></p>
-    <p>หลังส่งบัตรแล้วจะแก้ไขตัวเลือกไม่ได้</p>
-    <div class="actions"><button value="cancel" class="secondary" autofocus>กลับไปแก้ไข</button><button value="confirm">ยืนยันส่งบัตร</button></div>
-  </form>
-</dialog>
+  </main>
+
+  <footer class="wrap">คณะสิ่งแวดล้อม มหาวิทยาลัยเกษตรศาสตร์</footer>
 </body>
 </html>
