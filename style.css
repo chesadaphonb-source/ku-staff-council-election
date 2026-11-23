@@ -130,6 +130,48 @@ p { margin: 12px 0 0; color: var(--muted); }
 #voter-fallback { display: inline-block; padding: 10px 0; font-weight: 600; }
 footer { padding-bottom: 24px; color: var(--muted); font-size: .88rem; }
 
+html:has(.privacy-dialog[open]) { overflow: hidden; }
+.privacy-dialog {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  width: min(540px, calc(100% - 24px));
+  max-width: none;
+  height: fit-content;
+  max-height: calc(100% - 24px);
+  padding: clamp(18px, 5vw, 28px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  color: inherit;
+  background: #fff;
+  box-shadow: 0 30px 60px -20px #0b3d2a80;
+}
+.privacy-dialog::backdrop { background: #0f3a2ab0; backdrop-filter: blur(3px); }
+.privacy-dialog h2 { margin: 0 0 10px; color: #0e5a3a; font-size: clamp(1.18rem, 3vw, 1.45rem); }
+.privacy-dialog h2:focus { outline: none; }
+.privacy-dialog h3 { margin: 14px 0 6px; font-size: 1rem; }
+.privacy-dialog p { margin: 0; }
+.privacy-dialog ul { margin: 0; padding-inline-start: 1.3em; }
+.privacy-dialog li + li { margin-top: 4px; }
+.privacy-dialog li::marker { color: #127647; }
+.privacy-dialog .privacy-reassurance { margin-top: 12px; }
+.privacy-actions { display: flex; justify-content: flex-end; margin-top: 16px; }
+.privacy-actions button {
+  padding: 9px 22px;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #147b4b, #10643e);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  box-shadow: 0 6px 14px -6px #15834fb3;
+  cursor: pointer;
+}
+.privacy-actions button:hover { background: linear-gradient(180deg, #15834f, #0e5a3a); }
+.privacy-actions button:focus-visible { outline: 3px solid #2f9e68; outline-offset: 3px; }
+
 @media (max-width: 720px) {
   .hero { min-height: 215px; padding: 26px; }
   .hero-content { max-width: 86%; }
